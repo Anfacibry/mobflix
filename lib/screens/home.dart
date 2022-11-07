@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobflix/screens/add_video.dart';
 
 import '../components/row_botoes.dart';
 import '../components/stark_home.dart';
@@ -28,6 +29,7 @@ class HomeMobflix extends StatelessWidget {
         width: tamanhoTela.width,
         child: Stack(
           children: [
+            ///Widget que irá criar o banner
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
@@ -35,6 +37,9 @@ class HomeMobflix extends StatelessWidget {
               ),
               child: Image.asset("assets/images/banner.jpg"),
             ),
+
+            ///Corpo em que constará todo o conteúdo do aplicativo
+            ///incluindo botões e cards de videos
             Positioned(
               top: tamanhoTela.height * 0.2,
               child: Container(
@@ -53,7 +58,10 @@ class HomeMobflix extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      ///RowBotoes, são os botoes para navegar entre cursos
                       const RowBotoes(),
+
+                      ///Corpo em que irá contar com os videos da Alura
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: SizedBox(
@@ -67,6 +75,10 @@ class HomeMobflix extends StatelessWidget {
                 ),
               ),
             ),
+
+            ///O Positioned está sendo colocaco na sua devida posição apra que
+            ///fique visivel. Devido isso, o mesmo está sendo o ultimo widget
+            ///da coluna de Stack
             Positioned(
               top: tamanhoTela.height * 0.196,
               width: tamanhoTela.width * 0.4,
@@ -91,6 +103,16 @@ class HomeMobflix extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Cores.corPrimariaBotao,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (contex) => const AddVideo(),
+          ));
+        },
+        elevation: 10,
+        child: const Icon(Icons.add),
       ),
     );
   }
