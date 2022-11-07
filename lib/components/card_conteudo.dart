@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mobflix/theme/cores.dart';
 
 class CardConteudo extends StatelessWidget {
   final Size tamanhoPego;
   final String imagem;
-  const CardConteudo(
-      {required this.tamanhoPego, required this.imagem, Key? key})
-      : super(key: key);
+  final String titulo;
+  final String visualizacao;
+  final String tempo;
+  const CardConteudo({
+    required this.tamanhoPego,
+    required this.imagem,
+    required this.titulo,
+    required this.visualizacao,
+    required this.tempo,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +44,56 @@ class CardConteudo extends StatelessWidget {
               bottomLeft: Radius.circular(20),
             ),
             color: Theme.of(context).colorScheme.secondary,
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: tamanhoPego.width * 0.25,
+                child: Column(
+                  children: const [
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/alura001.jpg"),
+                    ),
+                    Text(
+                      "Alura Curso Online",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Cores.corFonteSecundaria,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: tamanhoPego.width * 0.55,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          titulo,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Cores.corFonteSecundaria,
+                          ),
+                        ),
+                        Text(
+                          "$visualizacao mil visualizações . há $tempo",
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Cores.corFonteSecundaria,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],

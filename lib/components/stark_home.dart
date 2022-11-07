@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobflix/components/card_conteudo.dart';
+import 'package:mobflix/data/dados.dart';
 
 import '../theme/cores.dart';
 import 'botao.dart';
@@ -10,6 +11,7 @@ class StackHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///Stack que criar a barra de rolagem dos videos
     return Stack(
       children: [
         const Botao(
@@ -32,22 +34,21 @@ class StackHome extends StatelessWidget {
               ),
               color: Theme.of(context).colorScheme.primary,
             ),
+
+            ///Carde com todas as informações dos videos
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  CardConteudo(
-                    tamanhoPego: tamanhoPego,
-                    imagem: "assets/images/conteudo001.png",
-                  ),
-                  CardConteudo(
-                    tamanhoPego: tamanhoPego,
-                    imagem: "assets/images/conteudo002.png",
-                  ),
-                  CardConteudo(
-                    tamanhoPego: tamanhoPego,
-                    imagem: "assets/images/conteudo003.png",
-                  ),
-                ],
+                children: Videos.videos
+                    .map(
+                      (e) => CardConteudo(
+                        tamanhoPego: tamanhoPego,
+                        imagem: e["imagem"]!,
+                        titulo: e["titulo"]!,
+                        visualizacao: e["visualizacao"]!,
+                        tempo: e["tempo"]!,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),
